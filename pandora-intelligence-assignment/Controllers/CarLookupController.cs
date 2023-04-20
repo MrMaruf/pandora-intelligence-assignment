@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Any;
-using pandora_intelligence_assignment.ApiKey;
 
 namespace pandora_intelligence_assignment.Controllers
 {
@@ -20,7 +19,6 @@ namespace pandora_intelligence_assignment.Controllers
             _logger = logger;
         }
 
-        [ApiKey]
         [HttpGet(Name = "GetWeatherForecast")]
         public async  Task<ContentResult?> Get(string? partialPlateNumber = null, string? brand = null, string? type = null)
         {

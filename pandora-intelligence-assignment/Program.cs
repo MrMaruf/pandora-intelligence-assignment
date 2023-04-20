@@ -1,7 +1,9 @@
 
-using pandora_intelligence_assignment.ApiKey;
+using Microsoft.OpenApi.Models;
+using pandora_intelligence_assignment.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -10,9 +12,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<ApiKeyAuthorizationFilter>();
-
-builder.Services.AddSingleton<IApiKeyValidator, ApiKeyValidator>();
 
 var app = builder.Build();
 
@@ -22,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.UseHttpsRedirection();
 
