@@ -4,7 +4,7 @@
     {
         private readonly RequestDelegate _next;
         private
-        const string APIKEY = "ApiKey";
+        const string APIKEY = "X-API-Key";
         public ApiKeyMiddleware(RequestDelegate next)
         {
             _next = next;
