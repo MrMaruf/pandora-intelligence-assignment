@@ -10,6 +10,7 @@ namespace pandora_intelligence_assignment.Controllers
     {
 
         private readonly ILogger<CarLookupController> _logger;
+        private const string apiBaseUrl = "https://opendata.rdw.nl/resource/m9d7-ebf2.json";
 
         public CarLookupController(ILogger<CarLookupController> logger)
         {
@@ -17,9 +18,8 @@ namespace pandora_intelligence_assignment.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<ContentResult?> Get(string? partialPlateNumber = null, string? brand = null, string? type = null)
+        public async Task<ContentResult> Get(string? partialPlateNumber = null, string? brand = null, string? type = null)
         {
-            string apiBaseUrl = "https://opendata.rdw.nl/resource/m9d7-ebf2.json";
             List<string> queryList = new List<string>();
             if (partialPlateNumber != null) queryList.Add($"$where=kenteken like '%25{partialPlateNumber}%25'");
             if (brand != null) queryList.Add($"merk={brand}");
@@ -28,7 +28,7 @@ namespace pandora_intelligence_assignment.Controllers
             Console.WriteLine(queryList.Count);
             Console.WriteLine(fullQuery.Length);
             Console.WriteLine(fullQuery);
-            if (fullQuery.Length == 0) return Content("No arguments provided"); ;
+            if (fullQuery.Length == 0) return Content("No arguments provided");
             using (HttpClient client = new HttpClient())
             {
                 string fullUrl = apiBaseUrl + "?" + fullQuery;
@@ -44,7 +44,9 @@ namespace pandora_intelligence_assignment.Controllers
                 {
                     Console.WriteLine("\nException Caught!");
                     Console.WriteLine("Message :{0} ", e.Message);
-                    return null;
+                    var errorResult = Content("Something went wrong");
+                    errorResult.StatusCode = 400;
+                    return errorResult;
                 }
             }
         }
