@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Any;
+using System.Net;
 
 namespace pandora_intelligence_assignment.Controllers
 {
@@ -20,7 +21,7 @@ namespace pandora_intelligence_assignment.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async  Task<ContentResult?> Get(string? partialPlateNumber = null, string? brand = null, string? type = null)
+        public async Task<ContentResult?> Get(string? partialPlateNumber = null, string? brand = null, string? type = null)
         {
             string apiBaseUrl = "https://opendata.rdw.nl/resource/m9d7-ebf2.json";
             List<string> queryList = new List<string>();
@@ -31,7 +32,7 @@ namespace pandora_intelligence_assignment.Controllers
             Console.WriteLine(queryList.Count);
             Console.WriteLine(fullQuery.Length);
             Console.WriteLine(fullQuery);
-            if (fullQuery.Length == 0) return null;
+            if (fullQuery.Length == 0) return Content("No arguments provided"); ;
             using (HttpClient client = new HttpClient())
             {
                 string fullUrl = apiBaseUrl + "?" + fullQuery;
