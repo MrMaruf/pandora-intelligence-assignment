@@ -7,8 +7,8 @@
 # TODO
 
 - [X] - Create base solution
-- [ ] - Add ApiKey authorization
+- [X] - Add ApiKey authorization
 - [ ] - Update ReadMe
-- [ ] - Add testing
+- [X] - Add testing
 - [ ] - Add CI/CD pipeline
 - [ ] - Find a way for production logging
