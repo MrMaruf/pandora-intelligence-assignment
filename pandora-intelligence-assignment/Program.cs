@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Key Auth", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pandaro Intelligence assignment", Version = "v1" });
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
     {
         Description = "ApiKey must appear in header",
@@ -41,12 +41,12 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-/* Commented out the part due to assignment request to have swagger ui for experimentation
- * if (app.Environment.IsDevelopment())
-{
+// Commented out the part due to assignment request to have swagger ui for experimentation
+//  if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}*/
+//}
 
 app.UseMiddleware<ApiKeyMiddleware>();
 
