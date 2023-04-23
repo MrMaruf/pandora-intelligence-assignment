@@ -17,7 +17,7 @@ At least
 - make
 - model
 - year of the vehicle
-### Assumptions & corrections
+### Assumptions & explanations
 I am not good with cars so I don't know what any of those things mean.
 - The more information returned, the better
 - Can return more than one car information, so it returns an array of cars info
