@@ -41,11 +41,12 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/* Commented out the part due to assignment request to have swagger ui for experimentation
+ * if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+}*/
 
 app.UseMiddleware<ApiKeyMiddleware>();
 
